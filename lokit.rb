@@ -31,6 +31,7 @@ module RbLoKit
   ffi_lib '/usr/lib/libreoffice/program/libmergedlo.so'
   attach_function :libreofficekit_hook, [:string], LibreOfficeKit.ptr
 end
-binding.pry
+
 lokit = RbLoKit.libreofficekit_hook('/usr/lib/libreoffice/program/')
-doc = lokit.pClass.documentLoad(lokit, 'test.odt')
+doc = lokit.values.first.values[2].call(lokit, 'test.odt')
+doc.values.first.values[2].call(doc, './test.doc', nil, nil)
